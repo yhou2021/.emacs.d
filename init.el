@@ -35,6 +35,8 @@
 		    :height 100
 		    :weight 'normal
 		    :width 'normal)
+(setq visible-bell t) ;; turn on visual notification
+(setq ring-bell-function 'ignore) ;; turn off sound notification
 ;; always show line number
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
@@ -52,6 +54,9 @@
      )
    whitespace-line-column 120 ; column at which whitespace-mode says the line is too long
    )
+
+(use-package anaconda-mode
+  :ensure t)
 
 (use-package atom-one-dark-theme
   :ensure t
@@ -89,6 +94,12 @@
 (use-package dockerfile-mode
   :after (docker)
   :ensure t)
+
+(use-package elpy
+  :after (flycheck)
+  :ensure t
+  :init
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 (use-package emacsql
   :ensure t)
