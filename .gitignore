@@ -1,0 +1,15 @@
+.cache/
+ac-comphist.dat
+auto-save-list/
+bookmarks
+elpa/
+eshell/
+games/
+projectile-bookmarks.eld
+projectile.cache
+recentf*
+session.*
+transient/
+url/
+.gitignore~
+init.el~
