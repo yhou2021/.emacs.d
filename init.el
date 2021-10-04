@@ -55,6 +55,12 @@
    whitespace-line-column 120 ; column at which whitespace-mode says the line is too long
    )
 
+(use-package ace-window
+  :ensure t
+  :init
+  :config
+  (global-set-key (kbd "M-o") 'ace-window))
+
 (use-package anaconda-mode
   :ensure t)
 
@@ -65,7 +71,9 @@
 
 (use-package avy
   :ensure t
-  :init)
+  :init
+  (global-set-key (kbd "C-:") 'avy-goto-char)
+  (global-set-key (kbd "C-'") 'avy-goto-char-2))
 
 (use-package bash-completion
   :ensure t)
@@ -73,6 +81,7 @@
 (use-package company
   :ensure t
   :init
+  (add-hook 'after-init-hook 'global-company-mode)
   :config
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1))
@@ -114,11 +123,15 @@
   :ensure t)
 
 (use-package go-mode
-  :ensure t)
+  :ensure t
+  :init
+  :config
+  (add-hook 'go-mode-hook 'lsp-deferred))
 
 (use-package go-projectile
   :after (projectile)
-  :ensure t)
+  :ensure t
+  :init)
 
 (use-package helm
   :ensure t)
