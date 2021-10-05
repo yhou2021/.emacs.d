@@ -13,3 +13,4 @@ transient/
 url/
 .gitignore~
 init.el~
+.lsp-session-v1

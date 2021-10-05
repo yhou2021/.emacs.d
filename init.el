@@ -27,7 +27,7 @@
 (column-number-mode 1) ;; show current column in status bar
 (global-hl-line-mode 1) ;; highlight current line
 (global-visual-line-mode 1) ;; enable line wrap
-(global-whitespace-mode 1) ;; enable whitespace handling by default
+;; (global-whitespace-mode 1) ;; enable whitespace handling by default
 (show-paren-mode 1) ;; highlight matched parenthesis
 (setq show-paren-delay 0)
 (set-face-attribute 'default nil ;; use jetbrains font
@@ -41,19 +41,19 @@
 (when (version<= "26.0.50" emacs-version )
   (global-display-line-numbers-mode))
 ;; see the apropos entry for whitespace-style
-(setq
-   whitespace-style
-   '(face ; viz via faces
-     trailing ; trailing blanks visualized
-     lines-tail ; lines beyond  whitespace-line-column
-     space-before-tab
-     space-after-tab
-     newline ; lines with only blanks
-     indentation ; spaces used for indent when config wants tabs
-     empty ; empty lines at beginning or end
-     )
-   whitespace-line-column 120 ; column at which whitespace-mode says the line is too long
-   )
+;; (setq
+;;    whitespace-style
+;;    '(face ; viz via faces
+;;      trailing ; trailing blanks visualized
+;;      lines-tail ; lines beyond  whitespace-line-column
+;;      space-before-tab
+;;      space-after-tab
+;;      newline ; lines with only blanks
+;;      indentation ; spaces used for indent when config wants tabs
+;;      empty ; empty lines at beginning or end
+;;      )
+;;    whitespace-line-column 120 ; column at which whitespace-mode says the line is too long
+;;    )
 
 (use-package ace-window
   :ensure t
@@ -126,7 +126,9 @@
   :ensure t
   :init
   :config
-  (add-hook 'go-mode-hook 'lsp-deferred))
+  (add-hook 'go-mode-hook 'lsp-deferred)
+  (add-to-list 'exec-path "$HOME/go/bin")
+  (add-hook 'before-save-hook 'gofmt-before-save))
 
 (use-package go-projectile
   :after (projectile)
@@ -134,7 +136,8 @@
   :init)
 
 (use-package helm
-  :ensure t)
+  :ensure t
+  :init)
 
 (use-package helm-company
   :after (helm company)
@@ -142,7 +145,11 @@
 
 (use-package helm-projectile
   :after (helm projectile)
-  :ensure t)
+  :ensure t
+  :init
+  :config
+  (setq projectile-completion-system 'helm)
+  (helm-projectile-on))
 
 (use-package ivy
   :ensure t
@@ -176,6 +183,9 @@
   :config
   (setq multi-term-program "/bin/bash"))
 
+(use-package origami
+  :ensure t)
+
 (use-package org
   :ensure t)
 
@@ -208,7 +218,12 @@
   :ensure t)
 
 (use-package tide
-  :ensure t)
+  :ensure t
+  :init
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))
 
 (use-package treemacs
   :ensure t
@@ -224,7 +239,12 @@
 
 (use-package treemacs-projectile
   :after (treemacs projectile)
-  :ensure t)
+  :ensure t
+  :init)
+
+(use-package typescript-mode
+  :ensure t
+  :init)
 
 (use-package web-beautify
   :ensure t)
@@ -248,7 +268,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(smartparens yasnippet-snippets web-mode web-beautify use-package treemacs-projectile treemacs-magit tide python-mode python prettier-js phpunit org multi-term lsp-ui js2-mode ivy helm-projectile helm-company go-projectile emacsql dockerfile-mode docker company-web company-php company-go bash-completion atom-one-dark-theme)))
+   '(origami smartparens yasnippet-snippets web-mode web-beautify use-package treemacs-projectile treemacs-magit tide python-mode python prettier-js phpunit org multi-term lsp-ui js2-mode ivy helm-projectile helm-company go-projectile emacsql dockerfile-mode docker company-web company-php company-go bash-completion atom-one-dark-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
