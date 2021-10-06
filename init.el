@@ -64,11 +64,6 @@
 (use-package anaconda-mode
   :ensure t)
 
-(use-package atom-one-dark-theme
-  :ensure t
-  :init
-  (load-theme 'atom-one-dark t))
-
 (use-package avy
   :ensure t
   :init
@@ -178,16 +173,24 @@
 (use-package markdown-mode
   :ensure t)
 
+(use-package material-theme
+  :ensure t
+  :init
+  (load-theme 'material t))
+
 (use-package multi-term
   :ensure t
   :config
-  (setq multi-term-program "/bin/bash"))
+  (setq multi-term-program "/bin/bash")
+  (bind-key "C-c m t" 'multi-term))
 
 (use-package origami
   :ensure t)
 
 (use-package org
-  :ensure t)
+  :ensure t
+  :init
+  (bind-key "C-c o" 'org-mode))
 
 (use-package php-mode
   :ensure t)
@@ -214,6 +217,9 @@
 (use-package python-mode
   :ensure t)
 
+(use-package restclient
+  :ensure t)
+
 (use-package smartparens
   :ensure t)
 
@@ -229,6 +235,7 @@
   :ensure t
   :defer t
   :init
+  (bind-key "C-c t" 'treemacs)
   :config
   (progn
     (setq treemacs-width 42)))
@@ -268,7 +275,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(origami smartparens yasnippet-snippets web-mode web-beautify use-package treemacs-projectile treemacs-magit tide python-mode python prettier-js phpunit org multi-term lsp-ui js2-mode ivy helm-projectile helm-company go-projectile emacsql dockerfile-mode docker company-web company-php company-go bash-completion atom-one-dark-theme)))
+   '(restclient material-theme origami smartparens yasnippet-snippets web-mode web-beautify use-package treemacs-projectile treemacs-magit tide python-mode python prettier-js phpunit org multi-term lsp-ui js2-mode ivy helm-projectile helm-company go-projectile emacsql dockerfile-mode docker company-web company-php company-go bash-completion atom-one-dark-theme)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
