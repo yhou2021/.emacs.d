@@ -2,6 +2,7 @@
 (setq user-full-name "Yubing Hou")
 
 ;; Emacs Base Confiugrations
+(require 'package)
 (package-initialize)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/")
@@ -59,6 +60,7 @@
       ;; Editor Customization
       x-select-enable-clipboard              t
       indent-tabs-mode                       t
+      tab-width                              4
       ;; always check if packages are installed
       use-package-always-ensure t)
 
@@ -110,6 +112,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Extensions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(use-package ac-php
+  :ensure t)
+
 (use-package ace-window
   :config
   (global-set-key (kbd "M-o") 'ace-window))
@@ -129,9 +134,9 @@
   (add-hook 'after-init-hook 'global-company-mode)
   (add-hook 'prog-mode-hook 'company-mode)
   (global-set-key (kbd "M-i") 'company-complete)
-  (setq company-idle-delay 0.2)
+  (setq company-idle-delay 0.1)
   (global-set-key (kbd "C-<tab>") 'company-complete)
-  (setq company-minimum-prefix-length 1))
+  (setq company-minimum-prefix-length 2)) ;; do not hint until 2 characters
 
 (use-package company-web
   :after company
@@ -150,6 +155,14 @@
   ("C-x c p" . counsel-projectile-ag)
   :config
   (counsel-projectile-on))
+
+(use-package css-mode
+  :config
+  (defun my-css-mode-hook ()
+    (set (make-local-variable 'company-backends)
+         '((company-css company-dabbrev-code company-files))))
+  (add-hook 'css-mode-hook 'my-css-mode-hook)
+  (add-hook 'css-mode-hook 'company-mode))
 
 (use-package dashboard
   :config
@@ -237,7 +250,7 @@
   :config
   (setq lsp-prefer-flymake nil)
   :hook (go-mode . lsp-deferred)
-  :hook (php-mode . lsp)
+  :hook (php-mode . lsp-deferred)
   :commands (lsp lsp-deferred))
 
 (use-package lsp-python-ms
@@ -254,11 +267,11 @@
   :config
   (setq lsp-ui-doc-enable t
 	lsp-ui-doc-use-childframe t
-	lsp-ui-doc-position ‘top
+	lsp-ui-doc-position 'top
 	lsp-ui-doc-include-signature t
 	lsp-ui-sideline-enable nil
 	lsp-ui-flycheck-enable t
-	lsp-ui-flycheck-list-position ‘right
+	lsp-ui-flycheck-list-position 'right
 	lsp-ui-flycheck-live-reporting t
 	lsp-ui-peek-enable t
 	lsp-ui-peek-list-width 60
@@ -322,6 +335,21 @@
 
 (use-package page-break-lines)
 
+(use-package php-mode
+  :mode
+  (("\\.php\\'" . php-mode))
+  :config
+  (add-hook 'php-mode-hook
+	    '(lambda ()
+	       (require 'company-php)
+	       (company-mode t)
+	       (add-to-list 'company-backends 'company-ac-php-backend))))
+
+(use-package phpunit
+  :mode
+  (("\\.php\\'" . phpunit-mode)))
+
+
 (use-package prettier-js)
 
 (use-package projectile
@@ -348,7 +376,6 @@
 		("M-," . pop-tag-mark)))
   (elpy-enable))
 
-
 ;; save recent files
 (use-package recentf
   :config
@@ -357,8 +384,7 @@
   (recentf-mode 1))
 
 (use-package smartparens
-  :config
-  (setq smartparens-strict-mode t))
+  :ensure t)
 
 (use-package smex)
 
@@ -376,15 +402,11 @@
 (use-package typescript-mode
   :ensure t
   :mode "\\.ts\\'")
+(with-eval-after-load 'typescript-mode (add-hook 'typescript-mode-hook #'lsp))
+
 
 (use-package web-beautify
   :ensure t)
-
-(use-package web-mode
-  :ensure t
-  :mode ( "\\.ts\\'")
-  :config
-  (add-hook 'web-mode-hook 'prettier-js-mode))
 
 ;; show key bindings in popup
 (use-package which-key
@@ -392,6 +414,9 @@
   (which-key-mode))
 
 (use-package yasnippet
+  :ensure t
+  :commands yas-minor-mode
+  :hook (go-mode . yas-minor-mode)
   :config
   (yas-global-mode 1))
 
@@ -399,6 +424,10 @@
   :after (yasnippet)
   :defer t)
 
-(require 'package)
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("gnu" . "https://elpa.gnu.org/packages/")))
+;; Language Specific Configurations
+
+;; Go
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)

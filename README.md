@@ -12,7 +12,7 @@ Install Prettier: `$ sudo npm i -g prettier`
 ## Language/Framework Server Protocols
 
 ### Angular
-Run: `$ npm install -g @angular/language-service@next typescript @angular/language-server`
+Run: `$ sudo npm install -g @angular/language-service@next typescript @angular/language-server`
 
 ### Go
 Make sure `gopls` is installed and `$GOPATH/bin` is in emacs' executable paths.
