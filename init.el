@@ -60,7 +60,6 @@
       ;; Editor Customization
       x-select-enable-clipboard              t
       indent-tabs-mode                       t
-      tab-width                              4
       ;; always check if packages are installed
       use-package-always-ensure t)
 
@@ -104,10 +103,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Theme configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package material-theme
+(use-package dracula-theme
   :defer t
   :init
-  (load-theme 'material t))
+  (load-theme 'dracula t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Extensions
@@ -118,6 +117,12 @@
 (use-package ace-window
   :config
   (global-set-key (kbd "M-o") 'ace-window))
+
+(use-package ag
+  :ensure t
+  :config
+  (setq ag-highlight-search t)
+  (global-set-key (kbd "C-S-f") 'ag-project))
 
 (use-package anaconda-mode
   :defer t)
@@ -314,7 +319,7 @@
 (use-package org
   :config
   (setq org-directory "~/org"
-	org-default-notes-file (concat org-directory "/todo.org"))
+ 	org-default-notes-file (concat org-directory "/todo.org"))
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda))

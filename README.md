@@ -2,12 +2,24 @@
 
 This repository documents my jounery back to becoming a regular Emacs user.
 
-## Editing
+## Edit
 
 ### Code Formatter
 
 #### Javascript
 Install Prettier: `$ sudo npm i -g prettier`
+
+## Search
+Several tools need to be installed to allow fast project traversal and string search.
+
+### `Ag`
+* Install
+  * On Linux: `$ sudo apt install silversearcher-ag`
+  * On Mac: `$ brew install the_silver_searcher`
+* Configurations
+  * Set up the `.agignore` file, or a global `$HOME/.agignore` file
+  * Install `ag` melpa
+
 
 ## Language/Framework Server Protocols
 
