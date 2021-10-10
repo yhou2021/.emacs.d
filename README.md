@@ -7,7 +7,10 @@ This repository documents my jounery back to becoming a regular Emacs user.
 ### Code Formatter
 
 #### Javascript
-Install Prettier: `$ sudo npm i -g prettier`
+Install Prettier: `$ sudo npm i -g js-beautify`
+
+#### TypeScript
+Install TS-Formatter: `$ sudo npm i -g typescript-formatter`
 
 ## Search
 Several tools need to be installed to allow fast project traversal and string search.
