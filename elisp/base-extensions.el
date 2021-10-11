@@ -23,7 +23,7 @@
   (global-set-key (kbd "M-i") 'company-complete)
   (setq company-idle-delay 0.1)
   (global-set-key (kbd "C-<tab>") 'company-complete)
-  (setq company-minimum-prefix-length 2)) ;; do not hint until 2 characters
+  (setq company-minimum-prefix-length 1)) ;; do not hint until 1 characters
 
 (use-package counsel
   :bind
@@ -182,6 +182,5 @@
 (use-package yasnippet-snippets
   :after (yasnippet)
   :defer t)
-
 
 (provide 'base-extensions)
