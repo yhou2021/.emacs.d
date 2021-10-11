@@ -6,7 +6,6 @@
   (("\\.js\\'" . web-mode)
    ("\\.html?\\'" . web-mode)
    ("\\.phtml?\\'" . web-mode)
-   ("\\.tpl\\.php\\'" . web-mode)
    ("\\.[agj]sp\\'" . web-mode)
    ("\\.as[cp]x\\'" . web-mode)
    ("\\.erb\\'" . web-mode)
