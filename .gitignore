@@ -21,3 +21,6 @@ url/
 
 /elpy/
 /smex-items
+/*.sqlite
+/index.sqlite-shm
+/index.sqlite-wal

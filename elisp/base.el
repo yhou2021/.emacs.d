@@ -26,6 +26,10 @@
 (prefer-coding-system        'utf-8)
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
+;; Garbage collection threshold
+(setq gc-cons-threshold 200000000)
+(setq read-process-output-max (* 4096 1024)) ;; 4 Mbit
+
 ;; Editor UI
 (column-number-mode 1) ;; show current column in status bar
 (set-face-attribute 'default nil ;; use jetbrains font

@@ -32,6 +32,16 @@ Run: `$ sudo npm install -g @angular/language-service@next typescript @angular/l
 ### Go
 Make sure `gopls` is installed and `$GOPATH/bin` is in emacs' executable paths.
 
+### PHP
+
+First, make sure `composer` and `php-curl`, `php7.4-sqlite3` are installed.
+
+Download `serenata` version `5.4.0`. [link](https://gitlab.com/Serenata/Serenata/-/releases)
+
+Move the downloaded binary to `~/.emacs.d/vendor/bin/` and rename it to `serenata-v5.4.0.phar`.
+
+
+
 ### Python3
 After `elpy` is added to emacs, also install addtional system requirements:
 `$ sudo apt install python3-jedi black python3-autopep8 yapf3 python3-yapf`
