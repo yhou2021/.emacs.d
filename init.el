@@ -7,6 +7,7 @@
 (require 'base) ;; base Emacs configurations
 (require 'base-theme) ;; theme settings
 (require 'base-extensions) ;; extensions used by all modes
+(require 'base-global-keys) ;; custom key set
 
 (require 'lang-go) ;; golang mode
 (require 'lang-javascript) ;; javascript mode development
@@ -38,7 +39,7 @@
 (use-package lsp-mode
   :ensure t
   :config
-  (setq lsp-prefer-flymake nil)
+  (setq lsp-prefer-flymake nil) ;; do not add go mode here
   :hook (go-mode . lsp-deferred)
   :hook (php-mode . lsp-deferred)
   :commands (lsp lsp-deferred))

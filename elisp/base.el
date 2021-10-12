@@ -4,10 +4,11 @@
 	     '("gnu" . "https://elpa.gnu.org/packages/"))
 
 ;; refresh packages if missing
-(when (not package-archive-contents)
+(unless package-archive-contents
   (package-refresh-contents))
 
-;; if use-package is not installed, install use-package
+;; package management setup
+;; if use-package is not installed, install use-package. Useful on non-Linux platform
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 (require 'use-package)
@@ -27,7 +28,7 @@
 (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 
 ;; Garbage collection threshold
-(setq gc-cons-threshold 200000000)
+(setq gc-cons-threshold (* 512 1000 1000)) ;; 512 MB, why not?
 (setq read-process-output-max (* 4096 1024)) ;; 4 Mbit
 
 ;; Editor UI
@@ -58,7 +59,6 @@
       inhibit-startup-screen                 t
       ;; Editor Customization
       x-select-enable-clipboard              t
-      indent-tabs-mode                       t
       ;; always check if packages are installed
       use-package-always-ensure t)
 
@@ -93,10 +93,29 @@
 (when (fboundp 'scroll-bar-mode)
   (scroll-bar-mode -1))
 
+;; Update frindge, have some extra space
+(set-fringe-mode 10)
+
 ;; Show matching parenthesis
 (show-paren-mode 1)
 
-;; Delete trailing whitespace before save
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                treemacs-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+
+;; [Editing] Tab width
+(setq-default tab-width 4)
+
+;; [Editing] use space instead of tabs
+(setq-default indent-tabs-mode nil)
+
+
+;; [Editing]  Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; load custom file here

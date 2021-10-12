@@ -13,6 +13,13 @@
   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
 
+(use-package lsp-mode
+  :config
+  (add-to-list 'lsp-enabled-clients 'gopls)
+  (setq lsp-idle-delay 0.300)
+  :hook (go-mode . lsp)
+  :commands (lsp lsp-deferred))
+
 ;; Optional - provides snippet support.
 (use-package yasnippet
   :ensure t
