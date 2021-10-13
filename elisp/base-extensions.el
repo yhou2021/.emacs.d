@@ -56,8 +56,12 @@
   (counsel-projectile-on))
 
 (use-package dashboard
+  :ensure t
   :config
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+  (setq dashboard-center-content t)
+  (setq dashboard-set-footer nil))
+
 
 ;; ensure that environment variables in Emacs is the same as shell
 (use-package exec-path-from-shell
@@ -162,6 +166,7 @@
 ;; origami - flexible text folding
 (use-package origami)
 
+;; Org mode
 (use-package org
   :config
   (setq org-directory "~/org"
@@ -169,6 +174,11 @@
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda))
+
+(with-eval-after-load 'org
+  (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+  (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+  (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
 ;; Show bullets in org-mode as UTF-8 characters
 (use-package org-bullets
