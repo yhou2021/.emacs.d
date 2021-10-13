@@ -9,6 +9,9 @@
   :config
   (setq ag-highlight-search t))
 
+;; additional icons
+(use-package all-the-icons)
+
 ;; automatic update packages
 (use-package auto-package-update
   :custom
@@ -61,7 +64,12 @@
   (dashboard-setup-startup-hook)
   (setq dashboard-center-content t)
   (setq dashboard-set-footer nil)
-  (setq dashboard-startup-banner "~/.emacs.d/assets/chillhop-airplane-mode.gif"))
+  (setq dashboard-projects-backend 'projectile)
+  (setq dashboard-startup-banner "~/.emacs.d/assets/chillhop-airplane-mode.gif")
+  (setq dashboard-set-heading-icons t)
+  (setq dashboard-set-file-icons t)
+  (setq dashboard-banner-logo-title ""))
+
 
 
 ;; ensure that environment variables in Emacs is the same as shell
