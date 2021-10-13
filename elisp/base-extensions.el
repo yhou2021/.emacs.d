@@ -60,7 +60,8 @@
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-center-content t)
-  (setq dashboard-set-footer nil))
+  (setq dashboard-set-footer nil)
+  (setq dashboard-startup-banner "~/.emacs.d/assets/chillhop-airplane-mode.gif"))
 
 
 ;; ensure that environment variables in Emacs is the same as shell
