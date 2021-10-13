@@ -40,7 +40,11 @@ Download `serenata` version `5.4.0`. [link](https://gitlab.com/Serenata/Serenata
 
 Move the downloaded binary to `~/.emacs.d/vendor/bin/` and rename it to `serenata-v5.4.0.phar`.
 
+Make it executable `$ chmod +x serenata-v5.4.0.phar`.
 
+If running into issue `LSP :: example_file_name no in project or it is blacklisted`, add project root
+to LSP workspace or remove it from the blacklist:
+`M-x lsp-workspace-blacklist-remove` or `M-s lsp-workspace-folders-add`.
 
 ### Python3
 After `elpy` is added to emacs, also install addtional system requirements:

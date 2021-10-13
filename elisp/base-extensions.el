@@ -28,13 +28,18 @@
 ;; company - string completion (COMPlete ANYthing)
 (use-package company
   :ensure t
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
   :config
   (add-hook 'after-init-hook 'global-company-mode)
   (add-hook 'prog-mode-hook 'company-mode)
   (global-set-key (kbd "M-i") 'company-complete)
-  (setq company-idle-delay 0.1)
+  (setq company-idle-delay 0.300)
   (global-set-key (kbd "C-<tab>") 'company-complete)
   (setq company-minimum-prefix-length 1)) ;; do not hint until 1 characters
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
 
 (use-package counsel
   :bind
@@ -87,6 +92,45 @@
   :config
   (setq linum-format " %3d ")
   (global-linum-mode t))
+
+
+;; LSP mode set up. Do no add language dependency here. Instead, configure each
+;; language in its own package `lang-<name>.el`
+(use-package lsp-mode
+  :pin melpa
+  :ensure t
+  :config
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-idle-delay 0.382)
+  (setq lsp-log-io t) ;; for troubleshooting purpose only
+  (lsp-enable-which-key-integration t)
+  :commands (lsp lsp-deferred))
+
+;; Provide quick symbol searching
+(use-package lsp-ivy)
+
+;; Provide better ui with lsp-mode and treemacs
+(use-package lsp-treemacs
+  :after lsp)
+
+(use-package lsp-ui
+  :requires (lsp-mode flycheck)
+  :commands lsp-ui-mode
+  :config
+  (setq lsp-ui-doc-enable t
+	lsp-ui-doc-use-childframe t
+	lsp-ui-doc-position 'top
+	lsp-ui-doc-include-signature t
+	lsp-ui-sideline-enable nil
+	lsp-ui-flycheck-enable t
+	lsp-ui-flycheck-list-position 'right
+	lsp-ui-flycheck-live-reporting t
+	lsp-ui-peek-enable t
+	lsp-ui-peek-list-width 60
+	lsp-ui-peek-peek-height 25
+	lsp-ui-sideline-enable nil
+    lsp-ui-sideline-show-hover nil)
+  :hook (lsp-mode-hook . lsp-ui-mode))
 
 ;; magit - magic Git
 (use-package magit
