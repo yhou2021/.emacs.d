@@ -1,9 +1,6 @@
 (use-package ac-php
   :ensure t)
 
-(use-package company-php
-  :ensure t)
-
 ;; (setq lsp-serenata-php-version 7.4)
 ;; (setq lsp-serenata-server-path "~/.emacs.d/vendor/bin/serenata-v5.4.0.phar")
 
@@ -30,13 +27,13 @@
 	       (company-mode t)
 	       (lsp-mode t)
 	       (add-to-list 'company-backends 'company-ac-php-backend)))
-  (setq lsp-serenata-php-version 7.4)
-  (setq lsp-serenata-server-path "~/.emacs.d/vendor/bin/serenata-v5.4.0.phar")
-  (setq lsp--tcp-server-port 87654) ;; Cake runs at 8765
-  (setq lsp-serenata-php-version 7.4)
-  (setq lsp-serenata-server-path "~/.emacs.d/vendor/bin/serenata-v5.4.0.phar")
-  (add-to-list 'lsp-enabled-clients 'serenata))
+  ;; (setq lsp-serenata-php-version 7.4)
+  ;; (setq lsp-serenata-server-path "~/.emacs.d/vendor/bin/serenata-v5.4.0.phar")
+  ;; (setq lsp--tcp-server-port 87654) ;; Cake runs at 8765
+  ;; (setq lsp-serenata-php-version 7.4)
+  ;; (setq lsp-serenata-server-path "~/.emacs.d/vendor/bin/serenata-v5.4.0.phar")
+  (add-to-list 'lsp-enabled-clients 'php-language-server))
 
-(add-hook 'php-mode-hook #'lsp-serenata)
+;; (add-hook 'php-mode-hook #'lsp-serenata)
 
 (provide 'lang-php)

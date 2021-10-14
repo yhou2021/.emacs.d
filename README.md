@@ -36,6 +36,10 @@ Make sure `gopls` is installed and `$GOPATH/bin` is in emacs' executable paths.
 
 First, make sure `composer` and `php-curl`, `php7.4-sqlite3` are installed.
 
+Install Jetbrains PHP Subs: `$ composer global require jetbrains/phpstorm-stubs:dev-master`
+
+Install Felix Becker's PHP Language Server: `$ composer global require felixfbecker/language-server --update-with-all-dependencies`
+
 Download `serenata` version `5.4.0`. [link](https://gitlab.com/Serenata/Serenata/-/releases)
 
 Move the downloaded binary to `~/.emacs.d/vendor/bin/` and rename it to `serenata-v5.4.0.phar`.

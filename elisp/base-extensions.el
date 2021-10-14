@@ -127,7 +127,7 @@
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-idle-delay 0.382)
-  (setq lsp-log-io t) ;; for troubleshooting purpose only
+  (setq lsp-log-io nil) ;; for troubleshooting purpose only
   (lsp-enable-which-key-integration t)
   :commands (lsp lsp-deferred))
 
