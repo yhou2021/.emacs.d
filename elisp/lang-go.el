@@ -4,6 +4,7 @@
   :mode "\\.go\\'"
   :hook (go-mode-hook . gofmt-before-save))
 
+
 (use-package go-projectile
   :ensure t)
 

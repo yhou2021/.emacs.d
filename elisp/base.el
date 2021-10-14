@@ -82,6 +82,9 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 (global-auto-revert-mode t)
 
+;; Base UI
+;; Maximize frame on every start up
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 ;; Disable Menu Bar
 (menu-bar-mode -1)
 
@@ -98,15 +101,6 @@
 
 ;; Show matching parenthesis
 (show-paren-mode 1)
-
-;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
-                term-mode-hook
-                shell-mode-hook
-                treemacs-mode-hook
-                eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
 
 ;; [Editing] Tab width
 (setq-default tab-width 4)

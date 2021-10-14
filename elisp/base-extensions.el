@@ -1,3 +1,12 @@
+;; Overall configurations
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 ;; ace-window: makes window switching easy
 (use-package ace-window
   :config
@@ -37,7 +46,7 @@
   (add-hook 'after-init-hook 'global-company-mode)
   (add-hook 'prog-mode-hook 'company-mode)
   (global-set-key (kbd "M-i") 'company-complete)
-  (setq company-idle-delay 0.300)
+  (setq company-idle-delay 0.0)
   (global-set-key (kbd "C-<tab>") 'company-complete)
   (setq company-minimum-prefix-length 1)) ;; do not hint until 1 characters
 
@@ -70,7 +79,10 @@
   (setq dashboard-set-file-icons t)
   (setq dashboard-banner-logo-title ""))
 
-
+;; Mode-line for Doom, but works without Doom. Make modeline cleaner
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
 
 ;; ensure that environment variables in Emacs is the same as shell
 (use-package exec-path-from-shell
@@ -179,7 +191,10 @@
 (use-package org
   :config
   (setq org-directory "~/org"
- 	org-default-notes-file (concat org-directory "/todo.org"))
+ 	    org-default-notes-file (concat org-directory "/todo.org"))
+  (setq org-agenda-files
+        '("~/org/Tasks.org"))
+  (setq global-linum-mode nil)
   :bind
   ("C-c l" . org-store-link)
   ("C-c a" . org-agenda))
@@ -188,6 +203,7 @@
   (add-to-list 'org-structure-template-alist '("sh" . "src shell"))
   (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
+
 
 ;; Show bullets in org-mode as UTF-8 characters
 (use-package org-bullets
@@ -240,6 +256,15 @@
 
 (use-package treemacs-projectile
   :after (treemacs projectile))
+
+;; Org visual fill - make org mode editing like Google Doc
+(defun yhou/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+(use-package visual-fill-column
+  :ensure t
+  :hook (org-mode . yhou/org-mode-visual-fill))
 
 ;; show key bindings in popup
 (use-package which-key
