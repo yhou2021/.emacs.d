@@ -32,7 +32,7 @@ Run: `$ sudo npm install -g @angular/language-service@next typescript @angular/l
 ### Go
 Make sure `gopls` is installed and `$GOPATH/bin` is in emacs' executable paths.
 
-### PHP
+### PHP (language server not aways working)
 
 First, make sure `composer` and `php-curl`, `php7.4-sqlite3` are installed.
 
@@ -49,6 +49,19 @@ Make it executable `$ chmod +x serenata-v5.4.0.phar`.
 If running into issue `LSP :: example_file_name no in project or it is blacklisted`, add project root
 to LSP workspace or remove it from the blacklist:
 `M-x lsp-workspace-blacklist-remove` or `M-s lsp-workspace-folders-add`.
+
+#### PHP Actor
+Install PHP Actor, follow this [instruction](https://phpactor.readthedocs.io/en/master/usage/standalone.html).
+
+Update Emacs plug in:
+```lisp
+(use-package phpactor :ensure t)
+(use-package company-phpactor :ensure t)
+```
+
+```
+M-x phpactor-install-or-update RET
+```
 
 ### Python3
 After `elpy` is added to emacs, also install addtional system requirements:

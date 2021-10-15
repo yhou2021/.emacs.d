@@ -238,6 +238,10 @@
 	(recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
   (recentf-mode 1))
 
+;; Smart jumping into defintion
+(use-package smart-jump
+  :ensure t)
+
 ;; smartparens - smart parenthesis & quote matching
 (use-package smartparens
   :ensure t)
