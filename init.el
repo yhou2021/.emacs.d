@@ -308,12 +308,14 @@
   :pin melpa
   :ensure t
   :hook (go-mode . lsp-deferred)
+  :hook (php-mode . lsp-deferred)
   :config
   (setq lsp-prefer-flymake nil)
   (setq lsp-idle-delay 0.382)
   (setq lsp-log-io t) ;; for troubleshooting purpose only
   (lsp-enable-which-key-integration t)
   (add-to-list 'lsp-enabled-clients 'gopls)
+  (add-to-list 'lsp-enabled-clients 'php-ls)
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   :commands (lsp lsp-deferred))
 
@@ -415,16 +417,12 @@
 
 (use-package page-break-lines)
 
-(use-package phpactor
-  :ensure t)
-
 ;; some configurations are disabled for now, but should be revisted someday in the future.
 ;; Known LSP that works: phpactor,
 (use-package php-mode
   :ensure t
   :mode "\\.php\\'"
   :config
-
   (add-hook 'php-mode-hook
             '(lambda()
                (require 'company-php)
@@ -432,24 +430,8 @@
                (lsp-mode t)
                (add-to-list 'company-backends 'company-ac-php-backend)))
 
-  ;; Configuration - PHP Language Server
-  ;; (setq lsp-clients-php-server-command (quote ("php" "~/.config/composer/vendor/bin/php-language-server.php" "--memory-limit=512M" "--tcp=127.0.0.1:20211")))
-  ;; (setq lsp-php-composer-dir "~/.config/composer/")
-  ;; (add-to-list 'lsp-enabled-clients 'php-ls)
-
   ;; Configuration - Intelephense
-  (add-to-list 'lsp-enabled-clients 'iph)
-
-  ;; Configuration - Serenata
-  ;; (setq lsp-serenata-php-version 7.4)
-  ;; (setq lsp-serenata-server-path "~/.emacs.d/bin/serenata-5.4.0.phar")
-  ;; (add-to-list 'lsp-enabled-clients 'serenata)
-
-  ;; Configuration - PHP Actor
-  ;; (add-to-list 'lsp-enabled-clients 'phpactor)
-  ;; (setq lsp-phpactor-path "/usr/local/bin/phpactor")
-  ;; :hook ((php-mode . (lambda () (set (make-local-variable 'company-backends) '(company-phpactor company-files)))))
-  )
+  (add-to-list 'lsp-enabled-clients 'iph))
 ;; eldoc integration
 ;; (add-hook 'php-mode-hook
 ;;           (lambda ()
