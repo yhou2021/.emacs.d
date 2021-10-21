@@ -24,3 +24,6 @@ url/
 /*.sqlite
 /index.sqlite-shm
 /index.sqlite-wal
+/var/
+.last-package-update-day
+.last-pacage-update-day

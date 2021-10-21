@@ -3,10 +3,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(js2-strict-inconsistent-return-warning nil)
- '(js2-strict-missing-semi-warning nil)
  '(package-selected-packages
-   '(smart-jump php-actor doom-modeline visual-fill-column all-the-icons lsp-pyright company-jedi jedi jedi-core ng2-mode lsp-treemacs lsp-ivy company-box ac-html-bootstrap ac-html-angular emmet-mode web-mode-edit-element auto-package-update company-lsp company-phpactor impatient-mode js2-refactor yasnippet-snippets which-key web-mode web-beautify use-package undo-tree treemacs-projectile treemacs-magit tide smex smartparens restclient python-mode python prettier-js phpunit page-break-lines origami org-projectile org-bullets multiple-cursors multi-term material-theme magit-popup lsp-ui lsp-python-ms js2-mode hlinum helm-projectile helm-company goto-chg go-projectile exec-path-from-shell emacsql elpy dumb-jump dracula-theme dockerfile-mode docker dashboard counsel-projectile company-web company-php company-go bash-completion atom-one-dark-theme anaconda-mode ag ac-php)))
+   '(yasnippet-snippets which-key flycheck yaml-mode dockerfile-mode docker company-php visual-fill-column typescript-mode treemacs-projectile treemacs-magit treemacs smex smartparens smart-jump python-mode php-mode org-projectile org-bullets origami no-littering magit-popup magit lsp-ui lsp-pyright lsp-ivy lsp-mode hlinum go-projectile go-mode exec-path-from-shell elpy doom-modeline dashboard counsel-projectile counsel company auto-package-update all-the-icons ag ace-window dracula-theme use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
