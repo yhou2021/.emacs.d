@@ -93,7 +93,6 @@
 		       (make-directory (concat temp-dir "/auto-save-list") :parents))
 
 (fset 'yes-or-no-p 'y-or-n-p)
-(global-auto-revert-mode t)
 
 ;; Base UI
 ;; Maximize frame on every start up
@@ -183,19 +182,13 @@
   :ensure t
   :after lsp-mode
   :hook (lsp-mode . company-mode) ;; only activate company mode if I am writing a program
-  :bind (:map company-active-map
-              ("<tab>" . company-complete-selection))
-  (:map lsp-mode-map
-        ("<tab>" . company-indent-or-complete-common))
   :config
-  (add-hook 'after-init-hook 'global-company-mode)
   (add-hook 'prog-mode-hook 'company-mode)
-  (setq company-idle-delay 0.1)
-  (global-set-key (kbd "C-<tab>") 'company-complete)
-  (setq company-minimum-prefix-length 1)) ;; do not hint until 1 characters
+  (setq company-idle-delay 0.4)
+  (setq company-minimum-prefix-length 3)) ;; do not hint until 1 characters
 
-(use-package company-php
-  :ensure t)
+;; (use-package company-php
+;;   :ensure t)
 
 ;; (use-package company-box
 ;;   :hook (company-mode . company-box-mode))
@@ -268,6 +261,12 @@
 (use-package flycheck
   :ensure t)
 
+(use-package golden-ratio
+  :ensure t
+  :init
+  :config
+  (setq golden-ratio-auto-scale t))
+
 ;; go-mode related hooks
 (defun lsp-go-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t)
@@ -307,7 +306,7 @@
   :ensure t
   :config
   (setq linum-format " %3d ")
-  (add-hook 'prog-mode-hook 'global-linum-mode))
+  (add-hook 'prog-mode-hook 'linum-mode))
 
 ;; LSP mode set up. Do no add language dependency here. Instead, configure each
 ;; language in its own package `lang-<name>.el`
@@ -346,26 +345,26 @@
 (use-package lsp-treemacs
   :after lsp)
 
-(use-package lsp-ui
-  :pin melpa-stable
-  :ensure t
-  :requires (lsp-mode flycheck)
-  :commands lsp-ui-mode
-  :config
-  (setq lsp-ui-doc-enable t
-	lsp-ui-doc-use-childframe t
-	lsp-ui-doc-position 'top
-	lsp-ui-doc-include-signature t
-	lsp-ui-sideline-enable nil
-	lsp-ui-flycheck-enable t
-	lsp-ui-flycheck-list-position 'right
-	lsp-ui-flycheck-live-reporting t
-	lsp-ui-peek-enable t
-	lsp-ui-peek-list-width 60
-	lsp-ui-peek-peek-height 25
-	lsp-ui-sideline-enable nil
-    lsp-ui-sideline-show-hover nil)
-  :hook (lsp-mode-hook . lsp-ui-mode))
+;; (use-package lsp-ui
+;;   :pin melpa-stable
+;;   :ensure t
+;;   :requires (lsp-mode flycheck)
+;;   :commands lsp-ui-mode
+;;   :config
+;;   (setq lsp-ui-doc-enable t
+;; 	lsp-ui-doc-use-childframe t
+;; 	lsp-ui-doc-position 'top
+;; 	lsp-ui-doc-include-signature t
+;; 	lsp-ui-sideline-enable nil
+;; 	lsp-ui-flycheck-enable t
+;; 	lsp-ui-flycheck-list-position 'right
+;; 	lsp-ui-flycheck-live-reporting t
+;; 	lsp-ui-peek-enable t
+;; 	lsp-ui-peek-list-width 60
+;; 	lsp-ui-peek-peek-height 25
+;; 	lsp-ui-sideline-enable nil
+;;     lsp-ui-sideline-show-hover nil)
+;;   :hook (lsp-mode-hook . lsp-ui-mode))
 
 ;; magit - magic Git
 (use-package magit
@@ -573,6 +572,10 @@
 ;;                   'phpactor-hover)))
 ;; Smartjump (go to definition
 
+(use-package popwin
+  :ensure t
+  :init)
+
 (use-package projectile
   :ensure t
   :config
@@ -580,7 +583,6 @@
 	(expand-file-name "projectile-bookmarks.eld" temp-dir))
   (setq projectile-enable-caching t)
   (setq projectile-completion-system 'ivy)
-  (projectile-global-mode)
   (setq projectile-mode-line
 	'(:eval (format " Projectile[%s]"
 			        (projectile-project-name)))))
