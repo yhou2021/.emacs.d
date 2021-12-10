@@ -18,7 +18,6 @@ recentf*
 session.*
 transient/
 url/
-
 /elpy/
 /smex-items
 /*.sqlite
@@ -26,4 +25,7 @@ url/
 /index.sqlite-wal
 /var/
 .last-package-update-day
-.last-pacage-update-day
+custom.el
+
+# ignore native emacs compilation caches
+eln-cache/
