@@ -22,6 +22,10 @@
   (setq company-idle-delay 0.2)
   (setq company-minimum-prefix-length 3)) ;; do NOT hint until 2 characters
 
+(use-package company-box
+  :ensure t
+  :hook (company-mode . company-box-mode))
+
 ;; Provide additional documation when Ivy is triggered
 (use-package counsel
   :diminish
