@@ -11,7 +11,8 @@
   :ensure t
   :config
   (setq ag-highlight-search t)
-  :bind (("C-x C-S-f" . ag-project)))
+  :bind (("C-x C-S-f" . ag-project)
+		 ("C-x C-S-r" . ag-project-regexp)))
 
 ;; Company - auto-completion
 (use-package company
@@ -55,9 +56,14 @@
   :hook (json-mode . lsp-deferred)
   :hook (php-mode . lsp-deferred)
   :hook (python-mode . lsp-deferred)
+  :hook (tex-mode . lsp-deferred)
   :hook (typescript-mode . lsp-deferred)
   :config
-  (setq lsp-idle-delay 0.5))
+  (setq lsp-idle-delay 0.5)
+  :bind(("C-c C-f C-d" . lsp-find-definition)
+		("C-c C-f C-r" . lsp-find-references)
+		("C-c C-f C-i" . lsp-find-implementation)
+		("C-c C-f C-b" . lsp-format-buffer)))
 
 (use-package lsp-ui
   :ensure t

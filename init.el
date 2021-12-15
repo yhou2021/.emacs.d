@@ -41,6 +41,7 @@
 (require 'lang-json)
 (require 'lang-php)
 (require 'lang-sql)
+(require 'lang-tex)
 (require 'lang-typescript)
 (require 'lang-yaml)
 
