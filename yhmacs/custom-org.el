@@ -31,7 +31,7 @@
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 (use-package org
-  :pin melpa
+  :pin org
   :ensure t
   :hook (org-mode . yhmacs/org-custom-setup)
   :config
