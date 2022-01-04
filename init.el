@@ -8,10 +8,12 @@
 ;; Package Management - sources
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                         ("melpa-stable" . "https://stable.melpa.org/packages/")
-                        ("org" . "https://orgmode.org/elpa/")
                         ("elpa" . "https://elpa.gnu.org/packages/")
 			("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 ;; [note] some packages require melpa-stable, like lsp-ui
+
+;; This line may help with the freezing issue in Mac
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 
 (package-initialize) ;; initialize package list
 (unless package-archive-contents ;; useful when setting up a fresh new computer
@@ -63,59 +65,8 @@
 (setq exec-path (append exec-path '("~/go/bin")))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 
-
 ;; [Editing]  Delete trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Fonts ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (set-face-attribute 'default nil :font "JetBrains Mono" :height 100)
-;; (set-face-attribute 'fixed-pitch nil :font "JetBrains Mono" :height 100)
-;;(set-face-attribute 'variable-pitch nil :font "Lato" :height 100 :weight 'regular)
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; Theme ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;; END OF ABSOLUTE ESSENTIAL CONFIGURATION ;;;;;;;;;;;;;;;;;;;;
-
-;;;;;;;;;;;;;;;;;;;;; START OF SEMI-ESSENTIAL CONFIGURATION ;;;;;;;;;;;;;;;;;;;;;
-
-;; ag - fast searching string within project (multi-threaded)
-;; (use-package ag
-;;   :ensure t
-;;   :config
-;;   (setq ag-highlight-search t))
-
-;; (use-package company
-;;   :pin melpa
-;;   :ensure t)
-
-;; (use-package counsel
-;;   :ensure t)
-
-;; (use-package ivy
-;;   :pin melpa
-;;   :ensure t
-;;   :init (ivy-mode 1)
-;;   :config
-;;   (setq ivy-height 20)
-;;   (setq ivy-count-format "%d%d "))
-
-;; (use-package ivy-rich
-;;   :after ivy
-;;   :init
-;;   (ivy-rich-mode 1))
-
-;; (use-package lsp-mode
-;;   :pin melpa
-;;   :ensure t
-;;   :hook (go-mode . lsp-deferred)
-;;   :hook (php-mode . lsp-deferred)
-;;   :config
-;;   (add-to-list 'lsp-enabled-clients 'gopls)
-;;   (add-to-list 'lsp-enabled-clients 'iph)
-;;   :commands (lsp lsp-deferred))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 ;; save recent files
 (use-package recentf
@@ -125,5 +76,7 @@
 	(recentf-expand-file-name "~/.emacs.d/private/cache/recentf"))
   (recentf-mode 1))
 
-;;;; Language specific configurations
-;; Golang
+;; Garbage collection hack, may help emacs running faster
+(use-package gcmh
+  :diminish gcmh-mode
+  :ensure t)

@@ -3,14 +3,14 @@
 ;; Font-size for each system
 (defvar yhou/font-scale 100)
 
-;; MacOS Specific Configurations
+;; MacOS Specific Configurations - since mac are all on retina display
 (if (eq system-type 'darwin)
 	(progn
 	  (setq insert-directory-program "gls" dired-use-ls-dired t) ;; MacOS built-in ls does not support group directory first)
 	  (setq yhou/font-scale 140)))
 
 (if (eq system-type 'gnu/linux)
-	(setq yhou/font-scale 94))
+	(setq yhou/font-scale 110))
 
 
 ;; System
@@ -94,9 +94,20 @@
 ;; Editor - parenthesis matching
 (show-paren-mode 1)
 
+;; Editor - line highlight
+(global-hl-line-mode t)
+
 ;; Editor - window navigation
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
+
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode)
+  (which-key-setup-minibuffer)
+  :config
+  (setq which-key-idle-delay 0.3))
 
 ;; Mode bar - show column number
 (column-number-mode 1)
