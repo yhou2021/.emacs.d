@@ -10,7 +10,7 @@
 	  (setq yhou/font-scale 140)))
 
 (if (eq system-type 'gnu/linux)
-	(setq yhou/font-scale 110))
+	(setq yhou/font-scale 100))
 
 
 ;; System
@@ -43,6 +43,14 @@
 (setq confirm-kill-emacs                     'y-or-n-p
       confirm-nonexistent-file-or-buffer     t
       require-final-newline                  t)
+
+;; UI - Window sizing
+(use-package golden-ratio
+  :ensure t
+  :init
+  (golden-ratio-mode 1)
+  :config
+  (setq golden-ratio-auto-scale t))
 
 ;; UI - Disable default start-up message
 (setq inhibit-startup-message t) ;; Disable start-up mesasge
@@ -93,6 +101,12 @@
 
 ;; Editor - parenthesis matching
 (show-paren-mode 1)
+
+;; Editor - highlight cursor
+(use-package beacon
+  :ensure t
+  :init
+  (beacon-mode 1))
 
 ;; Editor - line highlight
 (global-hl-line-mode t)
