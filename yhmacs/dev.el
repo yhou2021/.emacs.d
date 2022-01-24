@@ -82,6 +82,9 @@
 (use-package magit
   :ensure t)
 
+(use-package powerline
+  :ensure t)
+
 (use-package projectile
   :diminish
   :ensure t

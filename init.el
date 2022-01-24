@@ -42,6 +42,7 @@
 (require 'lang-javascript)
 (require 'lang-json)
 (require 'lang-php)
+(require 'lang-python)
 (require 'lang-sql)
 (require 'lang-tex)
 (require 'lang-typescript)
